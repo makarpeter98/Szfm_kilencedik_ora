@@ -1,5 +1,6 @@
 package hu.unideb.szfm.makar.Bootstrap_demo;
 
+
 import hu.unideb.szfm.makar.Bootstrap_demo.model.Person;
 import hu.unideb.szfm.makar.Bootstrap_demo.model.PersonRepository;
 import org.assertj.core.api.Assertions;
@@ -19,8 +20,21 @@ class BootstrapDemoApplicationTests {
     PersonRepository personRepository;
 
     @Test
-    void testPersonAdd()
+	void testPersonAdd()
     {
+        Person ePerson = Person.builder()
+                .firstName("Elek")
+                .lastName("Teszt")
+                .email("teszt.elek@email.com")
+                .password("1234")
+                .enabled(true)
+                .build();
 
+        Person aPerson = personRepository.save(ePerson);
+
+        Assertions.assertThat(aPerson).isNotNull();
+        Assertions.assertThat(aPerson).isEqualTo(ePerson);
     }
+
+
 }
